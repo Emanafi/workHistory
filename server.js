@@ -7,6 +7,8 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.json());
+
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 app.use(function(req, res, next) {
@@ -19,7 +21,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// const db = require('./models');
+const db = require('./models/index.js');
 
 /**********
  * ROUTES *
@@ -33,31 +35,86 @@ app.use(express.static('public'));
  * HTML Endpoints
  */
 
-app.get('/', function homepage(req, res) {
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/workhistory', (req, res) => {
+  res.sendFile(__dirname + '/views/workhistory.html');
+});
 
 /*
  * JSON API Endpoints
  */
 
+//Describing possible end points
 app.get('/api', (req, res) => {
-  // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
-  // It would be seriously overkill to save any of this to your database.
-  // But you should change almost every line of this response.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", //add link to github readme.md
+    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // https://dashboard.heroku.com/apps/ancient-retreat-41547
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Information about me"}, 
+      {method: "GET", path: "/api/workhistory", description: "All of my work history"},
+      {method: "POST", path: "/api/workhistory", description: "Creating an item"},
+      {method: "PUT", path: "/api/workhistory/:id", description: "Updating an item"},
+      {method: "DELETE", path: "/api/workhistory/:id", description: "Deleting an item"},
     ]
   })
 });
+
+//Profile
+ app.get('/api/profile', (req, res) => {
+  res.json({
+    fullName: "Elpi Manafi",
+    githubUsername: "Emanafi",
+    githubLink: "https://github.com/Emanafi",
+    githubProfileImage: "./images/eddie_and_i.jpeg",
+    currentCity: "San Jose, Ca",
+    hobbies: [
+      {name: "Soccer", type: "Sport", position: "Right Back"}, 
+      {name: "Mechanical work", type: "Hands On", car: "Toyota 4Runner"},
+    ]
+  })
+});
+
+// returns all work Index
+app.get('/api/workhistory', (req, res) => {
+  db.workHistory.find((err, allWork) => {
+    if (err) res.json(err);
+    res.json(allWork);
+  });
+});
+
+// Work Create
+app.post('/api/workhistory', (req, res) => {
+  db.workHistory.create(req.body, (err, newWork) => {
+    if (err) res.json(err);
+    res.json(newWork);
+  });
+});
+
+// Work Update
+app.put('/api/workhistory/:id', (req, res) => {
+  const workId = req.params.id;
+  const workData = req.body;
+  console.log(`Work ID = ${workId} \n Work Data = ${workData}`)
+  db.workHistory.findOneAndUpdate({_id: workId}, workData, {new: true}, (err, updatedWork) => {
+    res.json(updatedWork);
+  });
+});
+
+// Work Destroy
+app.delete('/api/workhistory/:id', (req, res) => {
+  const workId = req.params.id;
+
+  db.workHistory.findOneAndRemove({_id: workId}, (err, deletedWork) => {
+    if (err) res.json(err);
+    res.json(deletedWork);
+  });
+});
+
 
 /**********
  * SERVER *

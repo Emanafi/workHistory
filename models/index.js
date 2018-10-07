@@ -1,4 +1,10 @@
 const mongoose = require("mongoose");
-mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/personal-api", {useMongoClient: true});
+const workModel = require("./workhistory.js");
 
-// module.exports.Campsite = require("./campsite.js.example");
+mongoose.connect("mongodb://localhost/personal-api", { useNewUrlParser: true })
+  .then(() => console.log('Mongodb connected on port 27017...'))
+  .catch((err) => console.log(`MongoDB connection error: ${err}`))
+
+module.exports = {
+  workHistory: workModel,
+}
