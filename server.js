@@ -74,7 +74,7 @@ app.get('/api', (req, res) => {
     currentCity: "San Jose, Ca",
     hobbies: [
       {name: "Soccer", type: "Sport", position: "Right Back"}, 
-      {name: "Mechanical work", type: "Hands On", car: "Toyota 4Runner"},
+      {name: "Mechanical work", type: "Blue Collar", car: "Toyota 4Runner"},
     ]
   })
 });

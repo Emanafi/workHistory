@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     const work = workHist.forEach(work => {
       results.insertAdjacentHTML('afterbegin', `
-          <div style="margin: 0px auto 40px">
+          <div>
             <p><strong>${work.name}</strong></p>
             <p><strong>${work.type}</strong></p>
             <small id="${work._id}">Delete</small>

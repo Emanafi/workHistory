@@ -1,0 +1,36 @@
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 0 auto;
+}
+
+input {
+  padding: 8px;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 20px;
+  border-radius: 5%;
+}
+
+input[type="submit"] {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.work-results {
+  margin: 0 auto;
+  text-align: center;
+}
+
+small {
+  font-size: 15px;
+}
