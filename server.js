@@ -51,10 +51,10 @@ app.get('/workhistory', (req, res) => {
 app.get('/api', (req, res) => {
   res.json({
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express-personal-api/README.md", //add link to github readme.md
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // https://dashboard.heroku.com/apps/ancient-retreat-41547
+    documentationUrl: "https://git.generalassemb.ly/ElpiManafi/express-personal-api/blob/master/README.md", //add link to github readme.md
+    baseUrl: "https://dashboard.heroku.com/apps/ancient-retreat-41547",
     endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
+      {method: "GET", path: "/api/", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Information about me"}, 
       {method: "GET", path: "/api/workhistory", description: "All of my work history"},
       {method: "POST", path: "/api/workhistory", description: "Creating an item"},
@@ -124,3 +124,6 @@ app.delete('/api/workhistory/:id', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log('Express server is up and running on http://localhost:3000/');
 });
+
+//preface with i had food poisoning
+//valuable lesson: i didnt read the directions carefully

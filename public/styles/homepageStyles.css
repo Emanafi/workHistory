@@ -2,11 +2,15 @@ body {
   font-family: 'PT Sans Narrow', sans-serif;
 }
 
+/* TITLE */
+
 h1 {
   text-align: center;
   letter-spacing: 4px;
   font-size: 50px;
 }
+
+/* LIST OPTIONS */
 li {
   list-style: none;
   text-decoration: none;
@@ -21,4 +25,11 @@ a {
 a:hover {
   text-decoration: underline;
   color: gray;
+}
+
+.redirect {
+  font-family: 'PT Sans Narrow', sans-serif;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5%;
 }

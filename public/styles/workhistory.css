@@ -7,6 +7,8 @@ body {
   flex-direction: column;
 }
 
+/* FORM STYLING */
+
 form {
   display: flex;
   flex-direction: column;
@@ -26,11 +28,18 @@ input[type="submit"] {
   margin: 0 auto;
 }
 
+/* TEXT SHOWING WORK HISTORY*/
 .work-results {
   margin: 0 auto;
   text-align: center;
 }
 
+/* EDIT/DELETE BUTTONS*/
+
 small {
   font-size: 15px;
+}
+
+small:hover {
+  cursor: pointer;
 }

@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           <div>
             <p><strong>${work.name}</strong></p>
             <p><strong>${work.type}</strong></p>
-            <small id="${work._id}">Delete</small>
+            <small id="${work._id}">Remove</small>
             <small id="${work._id}">Edit</small>
           </div>
         `)
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   // DELETE WORK
   const handleEditDelete = (event) => {
-    if (event.target.innerText === 'Delete') {
+    if (event.target.innerText === 'Remove') {
       // console.log(event.target.id)
       fetch(baseURL + event.target.id, {
         method: 'DELETE',
